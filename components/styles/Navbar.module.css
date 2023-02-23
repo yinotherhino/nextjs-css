@@ -1,0 +1,30 @@
+.nav-container:root {
+    --dark-blue: #2B3467;
+    --light-blue: #BAD7E9;
+    --light-grey: #EEEEEE;
+    --light-red: #EB455F;
+}
+
+.nav-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 2rem;
+    background-color: var(--dark-blue);
+    color: var(--light-grey);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    background-color: var(--dark-blue);
+    clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
+    padding: 10px 0px;
+}
+
+.nav-container a{
+    color: var(--light-grey);
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+.nav-container a:hover{
+    color: var(--light-blue);
+}

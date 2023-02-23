@@ -1,11 +1,38 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import { Inter } from "@next/font/google";
+import styles from "@/styles/Home.module.css";
+import Link from "next/link";
+import Image from "next/image";
+import img1 from "@/public/news1.jpg";
+import img2 from "@/public/pexels-cottonbro-studio-6262964.jpg";
+import img3 from "@/public/pexels-cottonbro-studio-6262969.jpg";
+import img4 from "@/public/pexels-cottonbro-studio-6531728.jpg";
+import img5 from "@/public/pexels-daria-obymaha-1684916.jpg";
+import img6 from "@/public/pexels-đàng-thiện-thanh-tài-6347393.jpg";
+import img7 from "@/public/pexels-hasan-albari-1652340.jpg";
+import img8 from "@/public/pexels-lina-kivaka-1524146.jpg";
+import img9 from "@/public/pexels-nappy-936137.jpg";
 
-const inter = Inter({ subsets: ['latin'] })
+const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
 
-export default function Home() {
+const inter = Inter({ subsets: ["latin"] });
+
+interface IPhotos {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+}
+
+export default function Home({
+  articles,
+  photos,
+}: {
+  articles: any;
+  photos: IPhotos[];
+}) {
+  console.log(articles);
   return (
     <>
       <Head>
@@ -14,110 +41,35 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <header className={styles["main-header"]}>
+        <h1>Yino&apos;s Blog</h1>
+      </header>
       <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
+        <div className="card-container">
+          {images.map((img, index) => (<div className="card" key={index}>
+              <Image src={img} alt="news1" className="card-img" />
+            </div>)
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+            
+          )}
         </div>
       </main>
     </>
-  )
+  );
 }
+
+export const getStaticProps = async () => {
+  const promise1 = fetch("https://jsonplaceholder.typicode.com/posts?_limit=6");
+  const promise2 = fetch(
+    "https://jsonplaceholder.typicode.com/photos?_limit=6"
+  );
+  const [res1, res2] = await Promise.all([promise1, promise2]);
+  const [articles, photos] = await Promise.all([res1.json(), res2.json()]);
+
+  return {
+    props: {
+      articles,
+      photos,
+    },
+  };
+};
