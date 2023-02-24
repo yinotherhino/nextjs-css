@@ -1,0 +1,116 @@
+/* Define the styles for the triangles */
+.triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 86.6px 50px;
+    position: absolute;
+    transform-origin: bottom center;
+  }
+  
+  .triangle1 {
+    border-color: transparent transparent #FF4136 transparent;
+  }
+  
+  .triangle2 {
+    border-color: transparent transparent #0074D9 transparent;
+  }
+  
+  .triangle3 {
+    border-color: transparent transparent #2ECC40 transparent;
+  }
+  
+  /* Define the keyframe animations */
+  @keyframes move-triangle1 {
+    0% {
+      transform: rotate(0deg) translate(0, 0);
+    }
+    25% {
+      transform: rotate(90deg) translate(200px, 0);
+    }
+    50% {
+      transform: rotate(180deg) translate(0, 200px);
+    }
+    75% {
+      transform: rotate(270deg) translate(-200px, 0);
+    }
+    100% {
+      transform: rotate(360deg) translate(0, 0);
+    }
+  }
+  
+  @keyframes move-triangle2 {
+    0% {
+      transform: rotate(0deg) translate(0, 0);
+    }
+    25% {
+      transform: rotate(90deg) translate(0, 200px);
+    }
+    50% {
+      transform: rotate(180deg) translate(-200px, 0);
+    }
+    75% {
+      transform: rotate(270deg) translate(0, -200px);
+    }
+    100% {
+      transform: rotate(360deg) translate(0, 0);
+    }
+  }
+  
+  @keyframes move-triangle3 {
+    0% {
+      transform: rotate(0deg) translate(0, 0);
+    }
+    25% {
+      transform: rotate(90deg) translate(-200px, 0);
+    }
+    50% {
+      transform: rotate(180deg) translate(0, -200px);
+    }
+    75% {
+      transform: rotate(270deg) translate(200px, 0);
+    }
+    100% {
+      transform: rotate(360deg) translate(0, 0);
+    }
+  }
+  
+  /* Apply the animations to the triangles */
+  .triangle1 {
+    animation: move-triangle1 8s linear infinite;
+  }
+  
+  .triangle2 {
+    animation: move-triangle2 8s linear infinite;
+  }
+  
+  .triangle3 {
+    animation: move-triangle3 8s linear infinite;
+  }
+  
+  /* Define the styles for the big triangle */
+  .container {
+    width: 400px;
+    height: 346.4px;
+    position: relative;
+    margin: 50px auto 0;
+    border: 2px solid black;
+    overflow: hidden;
+  }
+  
+  /* Position the triangles inside the big triangle */
+  .triangle1 {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  
+  .triangle2 {
+    top: 173.2px;
+    left: 0;
+  }
+  
+  .triangle3 {
+    top: 173.2px;
+    right: 0;
+  }

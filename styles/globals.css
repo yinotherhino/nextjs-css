@@ -155,11 +155,15 @@ img {
 .card{
   display: inline-block;
   width: 30%;
-  animation: blink 2s infinite;
   border-radius: 10px;
-
+  box-shadow: 0 0 10px rgba(0,0,0,0.2), 0 0 20px rgba(0,0,0,0.2), 0 0 30px rgba(0,0,0,0.2), 0 0 40px rgba(0,0,0,0.2), 0 0 50px rgba(0,0,0,0.2), 0 0 60px rgba(0,0,0,0.2);
   overflow-x: hidden;
   overflow-y: hidden;
+}
+
+.loader{
+  animation: blink 1s 10;
+  width: 30%;
 }
 
 .card:nth-child(6n+1),
@@ -196,10 +200,9 @@ img {
   }
 }
 
-.card img {
-  transition: transform 0.3s ease;
-
-}
+/* .card img {
+  transition: transform 0.3s ease-in-out;
+} */
 
 img:hover {
   transform: scale(1.2);

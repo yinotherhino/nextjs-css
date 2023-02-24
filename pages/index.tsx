@@ -12,6 +12,7 @@ import img6 from "@/public/pexels-đàng-thiện-thanh-tài-6347393.jpg";
 import img7 from "@/public/pexels-hasan-albari-1652340.jpg";
 import img8 from "@/public/pexels-lina-kivaka-1524146.jpg";
 import img9 from "@/public/pexels-nappy-936137.jpg";
+import { useEffect, useState } from "react";
 
 const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
 
@@ -32,7 +33,13 @@ export default function Home({
   articles: any;
   photos: IPhotos[];
 }) {
-  console.log(articles);
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    
+    setTimeout(()=>setLoading(false), 1000)
+  
+  }, [])
+  
   return (
     <>
       <Head>
@@ -45,19 +52,31 @@ export default function Home({
         <h1>Yino&apos;s Blog</h1>
       </header>
       <main className={styles.main}>
-        <div className="card-container">
-          {images.map((img, index) => (<div className="card" key={index}>
+          {loading && (<div className="card-container">
+            <div className={`card ${loading ? "loader" : ""}`}>
+
+            </div>
+            <div className={`card ${loading ? "loader" : ""}`}>
+              
+            </div>
+            <div className={`card ${loading ? "loader" : ""}`}>
+              
+            </div>
+          </div>)}
+        {!loading && <div className="card-container">
+          {images.map((img, index) => (<div className={`card`} key={index}>
               <Image src={img} alt="news1" className="card-img" />
             </div>)
 
             
           )}
-        </div>
+        </div>}
       </main>
     </>
   );
 }
 
+// this is fetched at build time
 export const getStaticProps = async () => {
   const promise1 = fetch("https://jsonplaceholder.typicode.com/posts?_limit=6");
   const promise2 = fetch(
